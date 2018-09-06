@@ -1,0 +1,12 @@
+.text-box {
+  width: 200px;
+  background: blue;
+}
+
+#my-padding {
+  padding: 10px;
+}
+
+#my-margin {
+  margin: 10px;
+}
