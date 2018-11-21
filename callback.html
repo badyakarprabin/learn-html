@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<script>
+
+    let fruits = [
+        { name: 'apple', price: '10rs' },
+        { name: 'banana', price: '15rs' },
+        { name: 'cherry', price: '19rs' }
+    ]
+
+    printHello = (callback) => {
+        setTimeout(() => {
+            console.log('hello')
+            // callback()
+        }, 5000)
+    }
+
+    printHello();
+    console.log('world');
+
+
+    getFruits = () => {
+        let output = [];
+        setTimeout(() => {
+            fruits.forEach(function (item) {
+                output.push(`<li>${item.name} is ${item.price} expensive`)
+            })
+
+            document.body.innerHTML = output
+        }, 1000)
+    }
+
+    // createFruits = (fruit, callback) => {
+    //     setTimeout(() => {
+    //         fruits.push(fruit);
+    //         callback()
+    //     }, 5000)
+    // }
+
+    createFruitsPromise = (fruit) => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                fruits.push(fruit);
+                const error = false;
+                if (!error) {
+                    resolve()
+                } else {
+                    reject('Error')
+                }
+                callback()
+            }, 5000)
+        })
+    }
+
+    createFruitsPromise({ name: 'pineaple', price: '50rs' })
+        .then(getFruits)
+        .catch(err => console.log(err))
+
+    // createFruits({ name: 'mango', price: '30rs' }, getFruits)
+
+    async function init() {
+        await createFruitsPromise({ name: 'mango', price: '30rs' }, getFruits);
+        getFruits();
+    }
+
+    init()
+
+
+</script>
+
+<body>
+</body>
+
+</html>
+
+<html>
+
+</htm>

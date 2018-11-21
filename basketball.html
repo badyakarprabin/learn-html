@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+
+        body {
+            margin: 0;
+
+        }
+    </style>
+</head>
+
+<body>
+    <canvas></canvas>
+    <script>
+        var canvas = document.querySelector('canvas');
+        canvas.width = 800 || window.innerWidth;
+        canvas.height = 500 || window.innerHeight;
+
+        var c = canvas.getContext('2d');
+
+
+        function Power(x) {
+            this.score = 0;
+            this.x = x;
+            this.draw = () => {
+                c.fillStyle = 'green';
+                c.fill();
+                c.fillRect(650, 450, this.x, 20);
+            }
+
+            this.update = () => {
+                console.log(this.score)
+                if (this.score < 100) {
+                    this.x = this.score++
+                } else {
+                    this.score = 0
+                }
+            }
+        }
+
+        function Object(x, y, color) {
+            this.x = x;
+            this.y = y;
+
+            this.img = new Image();
+
+            this.img.src = 'basket.png';
+            this.draw = () => {
+                c.drawImage(this.img, this.x, this.y, 800, 500);
+            }
+        }
+
+        const gravity = 2;
+        const friction = 0.8;
+
+        function Ball(x, y, vx, vy, color) {
+            this.x = x;
+            this.y = y;
+            this.vy = vy
+            this.vx = vx
+            this.score = 0;
+            this.start = false;
+            this.color = color;
+            this.img = new Image(20, 20);
+            this.img.src = 'ball.png';
+            this.draw = () => {
+                c.fillText(`Score ${this.score}`, 50, 50);
+                c.drawImage(this.img, this.x, this.y, 25, 25)
+            }
+
+            this.update = () => {
+                console.log(this.y, this.x)
+                // scoring logic
+                if (this.x === 85 && this.y === 212) {
+                    this.score = this.score + 1;
+                }
+                //friction and gravity for height
+                if (this.y > 380) {
+                    this.vy = -Math.round(this.vy * friction);
+                } else if (this.start === true && this.y <= 380) {
+                    this.vy += gravity;
+                }
+                // friction for power
+                if (this.x < 400) {
+                    this.vx = Math.round(this.vx * 0.95)
+                } else if (this.x < 300) {
+                    this.vx = Math.round(this.vx * friction)
+                }
+                this.y += this.vy;
+                this.x += this.vx;
+            }
+        }
+
+        let goal;
+        let plain;
+        let basket;
+        let animatePlain;
+        function init() {
+            plain = new Object(0, 0, 'blue')
+            target = new Power();
+            animatePlain = new Ball(580, 260, 0, 0, 'red')
+        }
+
+        // setInterval(animate, 1000 / 15)
+        function animate() {
+
+            c.clearRect(0, 0, canvas.width, canvas.height);
+            console.log(animatePlain.y, plain.y);
+            plain.draw();
+            target.draw();
+            target.update();
+            animatePlain.draw();
+            animatePlain.update()
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+        document.onkeydown = (e) => {
+            if (e.keyCode === 37) {
+                animatePlain.vx = -5
+            } else if (e.keyCode === 39) {
+                animatePlain.vx = 5
+            } else if (e.keyCode === 38) {
+                console.log('power', target.score)
+                let up, power;
+
+                up = - Math.random() * 50;
+                power = - Math.random() * 50;
+
+                if (target.score === 3) {
+                    up = -27 || - Math.random() * 50;
+                    power = -27 || - Math.random() * 50;
+                }
+                animatePlain.vy = up
+                animatePlain.vx = power
+                animatePlain.start = true;
+                setTimeout(function () {
+                    animatePlain.start = false;
+                    animatePlain.vx = 0;
+                    animatePlain.x = 580;
+                    animatePlain.y = 260;
+                    animatePlain.vy = 0;
+                }, 1000)
+            }
+        }
+    </script>
+</body>
+
+</html>

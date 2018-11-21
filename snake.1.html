@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+
+        body {
+            margin: 0;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Canvas</h1>
+    <canvas></canvas>
+    <script>    
+        var canvas = document.querySelector('canvas');
+        canvas.width = 500 || window.innerWidth;
+        canvas.height = 500 || window.innerHeight;
+
+        var c = canvas.getContext('2d');
+
+        function init() {
+            c.fillRect(10, 10, 10, 10)
+        }
+
+        function animate() {
+            // c.clearRect(0, 0, canvas.width, canvas.height);
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+    </script>
+</body>
+
+</html>

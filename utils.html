@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+color colour
+345345 343 5
+345 34
+'page'
+$amtia 999-999-9999 timnam #tepkB 989.999.9999
+<head>
+    <script src='../scripts/myJS.js'>
+    </script>
+    <style>
+        input {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<script>
+
+    window.onload = function () {
+        var count = 10;
+
+        var reloadPage = setInterval(function () {
+            var currentDate = new Date().toLocaleTimeString()
+            document.getElementById('currentDate').innerHTML = currentDate
+        }, 1000)
+
+        var countPage = setInterval(function () {
+            document.getElementById('count').innerHTML = count
+            // if (count === 0) {
+            //     clearInterval(countPage)
+            // }
+            count--;
+
+        }, 1000)
+
+
+        setTimeout(function () {
+            // clearTimeout(reloadPage)
+            document.getElementById('count').style.color = "red"
+            document.getElementById('count').style.fontSize = "32px"
+        }, 7000)
+
+        setTimeout(function () {
+            clearTimeout(countPage)
+            document.getElementById('count').innerHTML = "You have failed the test"
+
+            document.getElementById('btn-submit').style.display = 'none'
+        }, 11000)
+
+    }
+
+</script>
+
+<body>
+    <section class='page-wrapper'>
+        <div id='currentDate'></div>
+        <h1 id='my-header'>Limited time quiz time:
+            <span id='count'></span>
+        </h1>
+        <div>
+            <form id='information'>
+                <div class="clearfix feedback-item">
+                    <div class="label">
+                        Where was buddha born
+                    </div>
+                    <div class="label-value">
+                        <div class="div">
+                            <input type="text" id='firstName' name="firstName" placeholder="Enter you firstname*" required />
+                        </div>
+                    </div>
+                    <div>
+                        <button id='btn-submit'>Submit</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </section>
+    <div id='result'></div>
+</body>
+
+</html>
+
+<script>
+    document.getElementById('information').onsubmit = onSubmitForm;
+
+    document.getElementById('firstName').addEventListener('blur', () => checkStringValue('firstName'));
+
+    document.getElementById('lastName').addEventListener('blur', () => checkStringValue('lastName'));
+
+    document.getElementsByTagName('input').firstname.addEventListener("blur", function (e) {
+        e.preventDefault();
+        if (e.target.value === '') {
+            document.getElementById('error_name').style.display = 'block'
+        } else {
+            document.getElementById('error_name').style.display = 'none'
+        }
+
+    });
+
+
+</script> This is my pc. My number is 999-999-9999. My dad's number is 999.999.9999. 898.343.4444 Hi this is first para.
+
+(987)555-5555
+
+<html>
+This is my html code.
+
+</htm>

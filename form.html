@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src='../scripts/myJS.js'>
+    </script>
+</head>
+<script>
+
+    // window.localStorage.setItem('Name', 'Learn js')
+    function checkStringValue(value) {
+        let inputValue = document.getElementById(value).value;
+        if (inputValue === '') {
+            var a = document.getElementsByClassName('error_name');
+            for (var i = 0; i < a.length; i++) {
+                var name = document.getElementsByClassName('error_name')[i].previousElementSibling.attributes['name'].value
+                if (name === value) {
+                    document.getElementsByClassName('error_name')[i].style.display = 'block'
+                }
+            }
+
+        } else {
+            var a = document.getElementsByClassName('error_name');
+            for (var i = 0; i < a.length; i++) {
+                var name = document.getElementsByClassName('error_name')[i].previousElementSibling.attributes['name'].value
+                if (name === value) {
+                    document.getElementsByClassName('error_name')[i].style.display = 'none'
+                }
+            }
+        }
+    }
+
+    function onSubmitForm(e) {
+        e.preventDefault();
+        let firstName = document.getElementById('firstName').value
+        let lastName = document.getElementById('lastName').value
+        let email = document.getElementById('my_email').value
+        let gender = document.querySelector('input[name=gender]:checked').value;
+
+        let genderPrefix = getGenderPrefix(gender);
+
+        document.getElementsByClassName('page-wrapper')[0].style.display = 'none';
+        document.getElementById('result').innerHTML = genderPrefix + firstName + lastName + "you email address is " + email;
+
+    }
+
+    function getGenderPrefix(gender) {
+        if (gender === 'male') {
+            return 'Mr.'
+        } else if (gender === 'female') {
+            return 'Ms.'
+        } else {
+            return null
+        }
+    }
+
+    function genderChange(name) {
+        console.log('You gender is', name);
+    }
+
+</script>
+<style>
+    .page-wrapper {
+        text-align: center;
+        margin: auto;
+        width: 50%;
+    }
+
+    #id {
+        margin: auto;
+    }
+
+    .label {
+        float: left;
+    }
+
+    .label-value {
+        float: right;
+    }
+
+    .clearfix {
+        overflow: auto;
+    }
+
+    .feedback-item {
+        margin: 25px;
+    }
+
+    input {
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .error_name {
+        font-size: 12px;
+        color: red;
+        display: none;
+    }
+</style>
+
+<body>
+    <section class='page-wrapper'>
+        <div id='t-date'></div>
+        <h1 id='my-header'>Feedback page</h1>
+        <div>
+            <form id='information'>
+                <div class="clearfix feedback-item">
+                    <div class="label">
+                        First name:
+                    </div>
+                    <div class="label-value">
+                        <div class="div">
+                            <input type="text" id='firstName' name="firstName" placeholder="Enter you firstname*" required />
+                            <div class='error_name'> Name cannot be empty</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="clearfix feedback-item">
+                    <div class="label">
+                        Last name:
+                    </div>
+                    <div class="label-value">
+                        <input type="text" name="lastName" id='lastName' placeholder="Enter you lastname*" />
+                        <div class='error_name'> Name cannot be empty</div>
+                    </div>
+                </div>
+                <div class="clearfix feedback-item">
+                    <div class="label">
+                        Email:
+                    </div>
+                    <div class="label-value">
+                        <input type="email" id='my_email' name="email" placeholder="Enter you email id*" required/>
+                    </div>
+                </div>
+                <div class="clearfix feedback-item">
+                    <div class="label">
+                        Gender:
+                    </div>
+                    <div class="label-value">
+                        <input type="radio" name="gender" value="male" checked onchange="genderChange('male')"> Male
+                        <input type="radio" name="gender" value="female" onchange="genderChange('female')"> Female
+                        <input type="radio" name="gender" value="other" onchange="genderChange('other')"> Other
+                    </div>
+                </div>
+                <button id='btn'>Click Me</button>
+                <input type="submit" value="xa">
+                <input type="submit" value="xaina">
+            </form>
+        </div>
+    </section>
+    <div id='result'></div>
+</body>
+
+</html>
+
+<script>
+    var fn = document.getElementById('firstName');
+    fn.onkeypress = function (e) {
+        console.log(e)
+    }
+
+    document.onkeypress = function (e) {
+        console.log(e);
+    }
+
+    var hasLoggedIn = window.localStorage.getItem('Name')
+    if (hasLoggedIn) {
+        document.body.innerHTML = 'You are', hasLoggedIn
+    }
+    var timeInterval = setInterval(function () {
+        var todayDate = new Date().toLocaleTimeString();
+
+        document.getElementById('t-date').innerHTML = todayDate;
+    }, 1000)
+    clearInterval(timeInterval)
+
+    document.addEventListener('keypress', (event) => {
+        const keyName = event.key;
+
+        // alert('keypress event\n\n' + 'key: ' + keyName);
+    });
+
+    // setTimeout(function () {
+    // }, 10000);
+
+    document.getElementById('information').onsubmit = onSubmitForm;
+
+    document.getElementById('firstName').addEventListener('blur', () => checkStringValue('firstName'));
+
+    document.getElementById('lastName').addEventListener('blur', () => checkStringValue('lastName'));
+
+    document.getElementsByTagName('input').firstname.addEventListener("blur", function (e) {
+        e.preventDefault();
+        if (e.target.value === '') {
+            document.getElementById('error_name').style.display = 'block'
+        } else {
+            document.getElementById('error_name').style.display = 'none'
+        }
+
+    });
+</script> color colour 999.999.9999 999.999.9999 999.999.9999 999-999-9999 (999)999-8885
+
+<!-- ^\w+ -->
+hi this is me and you are how test is going on time for toLocaleTimeString t/fefef
+<!-- ^\w+$ -->
+<!-- \b\w{4}\b -->
+<!-- \d{3}[-.]\d{3}[-.]\d{4} -->
+<!-- \(?\d{3}[-.)]\d{3}[-.]\d{4} -->
+<!-- [a-g]{3} -->
+<!-- var g = /\d{3}/ -->
+
+\W\b\w{5}\b\s\d{3}\.\d{3}

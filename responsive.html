@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link ref='stylesheet' type='text/css' href='index.css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type='text/javascript'>
+        window.onload = function () {
+            // alert('Loaded');
+        }
+    </script>
+    <style>
+        section .block {
+            width: 90%;
+            margin: 10px 10px;
+            float: left;
+            border: solid 1px;
+            color: red;
+        }
+
+        @media (min-width: 480px) {
+            section .block {
+                width: 40%;
+                color: green;
+
+            }
+        }
+
+        @media (min-width: 768px) {
+            section .block {
+                text-align: centre;
+                width: 20%;
+                color: blue;
+
+            }
+        }
+    </style>
+    <script src='../scripts/app.js'></script>
+</head>
+
+<body>
+    <section>
+        <div class='block'>Menu</div>
+        <div class='block'>Menu</div>
+        <div class='block'>Menu</div>
+        <div class='block'>Menu</div>
+    </section>
+    <!-- <div>
+        <div class='block'>Menu</div>
+        <div class='block'>Menu</div>
+        <div class='block'>Menu</div>
+        <div class='block'>Menu</div>
+    </div> -->
+</body>
+
+</html>
+
+
+const result = output; result.map

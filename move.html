@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 400px;
+            height: 400px;
+            background: black;
+            position: relative;
+        }
+
+        .child {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            left: 0;
+            border-radius: 0px 0px 26px 21px;
+            background: white;
+        }
+
+        .food {
+            width: 30px;
+            border-radius: 50px;
+            height: 30px;
+            position: absolute;
+            background: green;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Move</h1>
+    <div class="container">
+        <div class="child"></div>
+        <div class="food"></div>
+    </div>
+    <script>
+        let topRandomPosition;
+        let sideRandomPosition;
+
+        setInterval(() => {
+            topRandomPosition = Math.round(Math.random() * 40);
+            sideRandomPosition = Math.round(Math.random() * 40);
+
+            document.getElementsByClassName('food')[0].style.left = `${sideRandomPosition}px`;
+            document.getElementsByClassName('food')[0].style.top = `${topRandomPosition}px`;
+
+        }, 5000);
+
+        // let sidePosition = document.getElementsByClassName('food')[0].style.left;
+        // let topPosition = document.getElementsByClassName('food')[0].style.top;
+
+        sidePosition = `${sideRandomPosition}px`;
+        topPosition = `${topRandomPosition}px`;
+
+        let moveObjectHorizontal = 0;
+        let moveObjectVertical = 0;
+        document.onkeydown = function (e) {
+            let sideBoxPosition = document.getElementsByClassName('child')[0].style.left;
+            let topBoxPosition = document.getElementsByClassName('child')[0].style.top;
+
+            // 40
+            // 50 - 30
+
+            // if (40 + 10 <= 50 || 40 - 30 >= 30)
+            //     moveObjectHorizontal + 5 >= sideRandomPosition || moveObjectHorizontal - 5 <= sideBoxPosition && moveObjectVertical + 5 >= topRandomPosition || moveObjectVertical - 5 <= topRandomPosition
+
+            if (moveObjectHorizontal === sideRandomPosition && moveObjectVertical === topRandomPosition) {
+                document.getElementsByClassName('child')[0].style.color = 'red';
+                alert('Got it');
+                topRandomPosition = Math.round(Math.random() * 400);
+                sideRandomPosition = Math.round(Math.random() * 400);
+            }
+            if (e.keyCode === 39) {
+                moveObjectHorizontal += 1;
+                document.getElementsByClassName('child')[0].style.left = `${moveObjectHorizontal}px`;
+            }
+            if (e.keyCode === 37) {
+                moveObjectHorizontal -= 1;
+                document.getElementsByClassName('child')[0].style.left = `${moveObjectHorizontal}px`;
+            }
+            if (e.keyCode === 40) {
+                moveObjectVertical += 1;
+                document.getElementsByClassName('child')[0].style.top = `${moveObjectVertical}px`;
+            }
+            if (e.keyCode === 38) {
+                moveObjectVertical -= 1;
+                document.getElementsByClassName('child')[0].style.top = `${moveObjectVertical}px`;
+            }
+        }
+    </script>
+</body>
+
+</html>

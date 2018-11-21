@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+
+        body {
+            margin: 0;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Canvas</h1>
+    <canvas></canvas>
+    <script>
+        let mouse = {
+            x: 0,
+            y: 0
+        }
+        var canvas = document.querySelector('canvas');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        var c = canvas.getContext('2d');
+
+        addEventListener('mousemove', (event) => {
+            mouse.x = event.clientX;
+            mouse.y = event.clientY;
+        })
+
+        function getDistance(x, y, x1, y1) {
+            let xDistance = x1 - x;
+            let yDistance = y1 - y;
+
+            return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2))
+        }
+
+        function Circle(x, y, radius, color) {
+            this.x = x;
+            this.y = y;
+            this.vx = 10;
+            this.vy = 20;
+            this.radius = radius;
+            this.color = color;
+
+            this.update = function () {
+                this.draw();
+            }
+            this.draw = function () {
+                c.beginPath();
+                c.arc(this.x, this.y, this.radius, 0, 360, false);
+                c.fillStyle = this.color
+                c.fill();
+                c.closePath()
+            }
+
+            this.draw1 = function () {
+                c.beginPath();
+                c.arc(this.x, this.y, this.radius, 0, 360, false);
+                c.fillStyle = this.color
+                c.fill();
+                c.closePath()
+                if (circle3.x < 0 || circle3.x > canvas.width) {
+                    console.log('corowse');
+                    this.vx = - this.vx;
+                }
+                if (circle3.y < 0 || circle3.y > canvas.height) {
+                    console.log('corowse yyy');
+                    this.vy = - this.vy;
+                }
+                this.x += this.vx;
+                this.y += this.vy;
+            }
+        }
+
+        let circle1;
+        function init() {
+            circle1 = new Circle(100, 100, 40, 'red')
+            circle3 = new Circle(100, 100, 40, 'red')
+            circle2 = new Circle(undefined, undefined, 20, 'blue')
+        }
+        // c.fillStyle = 'rgba(255,0,0,0.1)';
+        // c.fillRect(x, y, width, height)
+        // we need to add fillStyle above fillReact.
+        // c.fillRect(100, 100, 100, 100);
+
+        // //lin
+        // c.beginPath();
+        // // c.moveTo(x, y);
+        // c.moveTo(50, 300);
+        // c.lineTo(300, 100);
+        // c.lineTo(400, 300);
+        // c.strokeStyle = "#fee"
+        // c.stroke()
+
+        // arc
+        // c.beginPath();
+        // c.arc(300, 300, 30, 0, Math.PI * 2, false)
+        // c.strokeStyle = 'blue'
+        // c.stroke();
+
+
+        function animate() {
+
+            requestAnimationFrame(animate);
+            c.clearRect(0, 0, canvas.width, canvas.height);
+            // circle3.x =
+            circle1.update();
+            circle2.x = mouse.x;
+            circle2.y = mouse.y;
+            circle2.update();
+            circle3.draw1();
+
+            let getDis = getDistance(circle1.x, circle1.y, circle2.x, circle2.y);
+            console.log(getDis)
+            if (getDis <= circle1.radius + circle2.radius) {
+                circle1.color = 'blue'
+                console.log('col')
+            } else {
+                cancelAnimationFrame(animate)
+                circle1.color = 'red'
+            }
+        }
+
+        init();
+        animate();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+
+        body {
+            margin: 0;
+
+        }
+    </style>
+    <script data-main="scripts/main" src="../scripts/require.js"></script>
+    <script>
+        var moment = require('moment');
+        console.log(moment().format());
+    </script>
+</head>
+
+<body>
+    <h1>Canvas</h1>
+    <canvas></canvas>
+    <script>
+        var canvas = document.querySelector('canvas');
+        canvas.width = 300 || window.innerWidth;
+        canvas.height = 300 || window.innerHeight;
+
+        var c = canvas.getContext('2d');
+
+        function Object(x, y, color) {
+            this.x = x;
+            this.y = y;
+            this.color = color;
+            this.img = new Image();
+            this.img.src = 'floor.png';
+            this.draw = () => {
+                c.drawImage(this.img, this.x, this.y, 240, 20);
+                // c.fillStyle = this.color;
+                // c.fill();
+                // c.fillRect(this.x, this.y, 240, 20)
+            }
+        }
+
+        function Ball(x, y, vx, vy, color) {
+            this.x = x;
+            this.y = y;
+            this.vy = vy
+            this.vx = vx
+            this.color = color;
+            this.draw = () => {
+                c.fillStyle = this.color;
+                c.fill();
+                c.fillRect(this.x, this.y, 25, 25)
+            }
+
+            this.update = () => {
+                this.y += this.vy;
+                this.x += this.vx;
+            }
+        }
+
+        let plain;
+        let animatePlain;
+        function init() {
+            plain = new Object(0, 252, 'blue')
+            animatePlain = new Ball(20, 20, 0, 8, 'red')
+        }
+
+        setInterval(animate, 1000 / 15)
+        function animate() {
+
+            c.clearRect(0, 0, canvas.width, canvas.height);
+            console.log(animatePlain.y, plain.y);
+            if (animatePlain.y + 24 === plain.y && animatePlain.x < 240) {
+                animatePlain.vy = 0
+            } else {
+                animatePlain.vy = 8
+            }
+            plain.draw();
+            animatePlain.draw();
+            animatePlain.update()
+            // requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+        document.onkeydown = (e) => {
+            if (e.keyCode === 37) {
+                animatePlain.vx = -5
+            } else if (e.keyCode === 39) {
+                animatePlain.vx = 5
+            }
+        }
+    </script>
+</body>
+
+</html>

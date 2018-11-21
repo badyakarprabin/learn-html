@@ -1,0 +1,47 @@
+div {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+}
+
+section {
+  width: 100%;
+  border: solid 1px blue;
+  height: 200px;
+}
+
+.body-wrapper {
+  width: 80%;
+  border: solid 1px black;
+  height: 200px;
+  margin: auto;
+}
+
+.header-logo {
+  width: 45%;
+  text-align: center;
+  height: 200px;
+  border: solid 1px black;
+  float: left;
+}
+
+.header-menu {
+  width: 45%;
+  height: 200px;
+  border: solid 1px black;
+  float: right;
+}
+.text-box {
+  width: 200px;
+  background: blue;
+}
+
+#my-padding {
+  padding: 10px;
+}
+
+#my-margin {
+  margin: 10px;
+}

@@ -1,0 +1,100 @@
+<html>
+
+<head>
+    <title>3-car-game</title>
+</head>
+
+<body>
+    <div id="wrapper"></div>
+    <script>
+
+
+        var containerHeight = 512;
+        var containerWidth = 512;
+        var trackLeft = 140;
+        var trackRight = 370;
+        var trackLane = 76;
+        var carHeight = 105;
+        var carWidth = 50;
+        var player;
+
+        function Car() {
+            this.x = 0;
+            this.y = 0;
+            this.dx = 0;
+            this.height = 0;
+            this.width = 0;
+            this.areaHeight = 0;
+            this.areaWidth = 0;
+            this.acceleration = 0;
+            this.element = '';
+
+            var that = this;
+            var carElement = document.createElement('div');
+            player.element.appendChild(carElement);
+
+            this.init = function (props) {
+                this.x = 50;
+                this.y = 50;
+                this.dx = 0;
+                this.height = 50;
+                this.width = 50;
+                this.areaHeight = 50;
+                this.areaWidth = 50;
+                this.element = props.element;
+                this.acceleration = 1;
+
+                setStyle();
+                setElementPosition();
+            };
+
+            var setStyle = function () {
+                that.element.style.height = carHeight + 'px';
+                that.element.style.width = carWidth + 'px';
+                that.element.style.position = 'absolute';
+
+                var carImage = document.createElement('img');
+                carImage.src = 'https://png.pngtree.com/element_pic/16/06/03/00575065c3557f1.jpg';
+                that.element.appendChild(carImage);
+            }
+
+            var setElementPosition = function () {
+                that.element.style.left = that.x + 'px';
+                that.element.style.top = that.y + 'px';
+            };
+
+            this.updatePosition = function () {
+                if (this.y >= (this.areaHeight - this.height)) {
+                    this.ydirection = -1;
+                } else if (this.y <= 0) {
+                    this.ydirection = 1;
+                }
+
+                this.y += this.acceleration * this.ydirection;
+                setElementPosition();
+            };
+
+            this.left = function () {
+                if ((this.x - this.dx) >= trackLeft) {
+                    this.x -= this.dx;
+                    setElementPosition();
+                }
+            };
+
+            this.right = function () {
+                if ((this.x + this.dx) <= trackRight - this.width) {
+                    this.x += this.dx;
+                    setElementPosition();
+                }
+            };
+        }
+
+        var initializePlayer = function () {
+            player = new Car();
+        };
+        initializePlayer();
+
+    </script>
+</body>
+
+</html>
